@@ -93,7 +93,7 @@ module BinanceAPI
     #     timestamp: 1499827319559
     # }
 
-    def order(symbol, side, type, quantity, options = {})
+    def order(symbol, side, type, options = {})
       recv_window = options.delete(:recv_window) || BinanceAPI.recv_window
       timestamp = options.delete(:timestamp) || Time.now
 
@@ -102,7 +102,8 @@ module BinanceAPI
           side: side,
           type: type,
           timeInForce: options.fetch(:time_in_force, nil),
-          quantity: quantity,
+          quantity: options.fetch(:quantity, nil),
+          quoteOrderQty: options.fetch(:quoteOrderQty, nil),
           price: options.fetch(:price, nil),
           newClientOrderId: options.fetch(:new_client_order_id, nil),
           stopPrice: options.fetch(:stop_price, nil),
